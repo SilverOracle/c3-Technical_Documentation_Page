@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documentation Page</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>CSS Modules</header>
+      <ul>
+        <li>
+          <a class="nav-link" href="#CSS_Modules">CSS Modules</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Get_Started_&_Examples">Get Started & Examples</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Naming">Naming</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Pseudo_class_selectors">Pseudo class selectors</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Theming">Theming</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Why_CSS_Modules?">Why CSS Modules?</a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="CSS_Modules">
+        <header>CSS Modules</header>
+        <article>
+          <p>A CSS Module is a CSS file where all class names and animation names are scoped locally by default. All URLs (<mark>url(...)</mark>) and <mark>@imports</mark> are in module request format (<mark>./xxx</mark> and <mark>../xxx</mark> means relative, <mark>xxx</mark> and <mark>xxx/yyy</mark> means in modules folder, i.e. in <mark>node_modules</mark>).</p>
+          <p>CSS Modules compile to a low-level interchange format called ICSS (or Interoperable CSS) but are written like normal CSS files:</p>
+          <code>
+            /* style.css */ <br>
+            .className { <br>
+            color: green; <br>
+            }
+          </code>
+          <p>When importing a CSS Module from a JavaScript Module, it exports an object with all mappings from local names to global names.</p>
+          <code>
+            import styles from './style.css'; <br>
+
+            element.innerHTML = '&ltdiv class="' + styles.className + '"&gt';
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Get_Started_&_Examples">
+        <header>Get Started & Examples</header>
+        <article>
+          <h1>Setting up CSS Modules</h1>
+          <p>CSS Modules works by compiling individual CSS files into both CSS and data. The CSS output is normal, global CSS, which can be injected directly into the browser or concatenated together and written to a file for production use. The data is used to map the human-readable names you've used in the files to the globally-safe output CSS.</p>
+          <h2>Tools</h2>
+          <hr>
+          <ul class="no-list_dot">
+            <li>
+              <h3>Bun</h3>
+              <p>Bun supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Lightning CSS</h3>
+              <p>Lightning CSS supports almost all features of CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Parcel</h3>
+              <p>Parcel supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>PostCSS</h3>
+              <p>PostCSS supports CSS Modules through the plugin <mark>postcss-modules</mark>.</p>
+            </li>
+            <li>
+              <h3>Rspack</h3>
+              <p>Rspack supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Webpack</h3>
+              <p>The css-loader has CSS Modules built-in. Simply activate it by using the <mark>?modules</mark> flag. We maintain an example project using this at css-modules/webpack-demo.</p>
+            </li>
+            <li>
+              <h3>Vite</h3>
+              <p>Vite supports CSS Modules through Lightning CSS.</p>
+            </li>
+          </ul>
+          <h2>Frameworks</h2>
+          <hr>
+          <ul class="no-list_dot">
+            <li>
+              <h3>Angular</h3>
+              <p>Angular supports CSS Modules through <mark>postcss-modules</mark> and <mark>posthtml-css-modules</mark>.</p>
+            </li>
+            <li>
+              <h3>Astro</h3>
+              <p>Astro supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Create React App</h3>
+              <p>Create React App supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Ember</h3>
+              <p>Ember supports CSS Modules through <mark>ember-css-modules</mark>.</p>
+            </li>
+            <li>
+              <h3>Next.js</h3>
+              <p>Next.js supports CSS Modules for both webpack and Turbopack (<mark>next dev --turbo</mark>).</p>
+            </li>
+            <li>
+              <h3>Nuxt</h3>
+              <p>Nuxt supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Remix</h3>
+              <p>Remix supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Solid</h3>
+              <p>Solid supports CSS Modules.</p>
+            </li>
+            <li>
+              <h3>Svelte</h3>
+              <p>Svelte supports CSS Modules through the preprocessor <mark>svelte-preprocess-cssmodules</mark>.</p>
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="Naming">
+        <header>Naming</header>
+        <article>
+          <p>We recommend camelCase for local class names.</p>
+          <p>While not enforced, camelCase is preferred as kebab-case may cause unexpected behavior when trying to access <mark>styles.class-name</mark> with dot notation. You can still work around kebab-case with bracket notation (e.g. <mark>styles['class-name']</mark>) but <mark>styles.className</mark> is preferred.</p>
+        </article>
+      </section>
+      <section class="main-section" id="Pseudo_class_selectors">
+        <header>Pseudo class selectors</header>
+        <article>
+          <p>CSS Modules also support adding pseudo class selectors:</p>
+          <code>
+            /* component/text.css */ <br>
+            .text { <br>
+            color: #777; <br>
+            font-weight: 24px; <br>
+            } <br><br>
+
+            .text:hover { <br>
+            color: #f60; <br>
+            }
+          </code>
+          <code>
+            /* component/text.js */ <br>
+            import styles from './text.css'; <br>
+            import React from 'react'; <br><br>
+
+            export function Text() { <br>
+              return &ltp className={styles.text}>Text with hover&lt/p>; <br>
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Theming">
+        <header>Theming</header>
+        <article>
+          <p>Instead of importing a style in the component, the component can take a style as property. This way different themes can be used. </p>
+          <p>The user can even define custom themes.</p>
+          <code>
+            /* component/theme-a.css */ <br>
+            .outer { <br>
+              background: green; <br>
+            } <br>
+            .inner { <br>
+              color: blue; <br>
+            }
+          </code>
+          <code>
+            /* component/theme-b.css */ <br>
+            .outer { <br>
+              background: red; <br>
+            } <br>
+            .inner { <br>
+              color: yellow; <br>
+            }
+          </code>
+          <code>
+            /* component/index.js */ <br>
+            export function Component({ theme }) { <br>
+              return ( <br>
+                &ltdiv className={theme.outer}&gt <br>
+                  &ltdiv className={theme.inner} /&gt <br>
+                &lt/div&gt <br>
+              ); <br>
+            }
+          </code>
+          <code>
+            import themeA from 'component/theme-a.css'; <br>
+            import themeB from 'component/theme-b.css'; <br>
+            import customTheme from './custom-theme.css'; <br><br>
+
+            import {Component} from 'component'; <br><br>
+
+            &ltComponent theme={themeA} /&gt <br>
+            &ltComponent theme={themeB} /&gt <br>
+            &ltComponent theme={customTheme} /&gt
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Why_CSS_Modules?">
+        <header>Why CSS Modules?</header>
+        <article>
+          <ul class="list">
+            <li>Local Scope Prevents Clashes: CSS Modules use local scope to avoid style conflicts across different project parts, allowing component-scoped styling.
+</li>
+            <li>Clear Style Dependencies: Importing styles into their respective components clarifies which styles impact which areas, enhancing code readability and maintenance.</li>
+            <li>Solves Global Scope Problems: CSS Modules prevent the common issue of styles in one file affecting the entire project by localizing styles to specific components.</li>
+            <li>Boosts Reusability and Modularity: CSS Modules allow the same class names in different modules, promoting modular, reusable styling.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
